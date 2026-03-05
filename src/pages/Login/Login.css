@@ -1,0 +1,13 @@
+.background {
+    height: 100vh;
+    width: 100%;
+    background-image: url("/public/register_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.right_div{
+    width: 60%;
+    height: 100vh;
+}
