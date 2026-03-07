@@ -45,8 +45,8 @@ export default function Login() {
         <div>
             <div className="login_container">
                 <div className="left_side">
-                    <Card sx={{ width: 450, margin: 1 }}>
-                        <Typography variant="h2" component="h2" sx={{paddingLeft:19,color:"#8320dfff"}} >
+                    <Card className="login_card" sx={{ margin: 1 }}>
+                        <Typography variant="h2" component="h2" sx={{textAlign:"center",color:"#8320dfff"}} >
                                 Login
                             </Typography>
                         <CardContent>
@@ -61,7 +61,7 @@ export default function Login() {
                             <br /><br /><br />
 
                             <NavLink to={"/register"}>You haven't a account?</NavLink>
-                            <Button variant="contained" color="success" sx={{marginLeft:35}} onClick={login}>
+                            <Button sx={{ mt:2, ml:"auto", display:"block" }} className='login_btn' variant="contained" color="success" onClick={login}>
                                 Login
                             </Button>
 
