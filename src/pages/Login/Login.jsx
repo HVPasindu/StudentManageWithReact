@@ -43,8 +43,8 @@ export default function Login() {
 
     return (
         <div>
-            <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh", backgroundColor: "#d7bbf2" }}>
+            <div className="login_container">
+                <div className="left_side">
                     <Card sx={{ width: 450, margin: 1 }}>
                         <Typography variant="h2" component="h2" sx={{paddingLeft:19,color:"#8320dfff"}} >
                                 Login
