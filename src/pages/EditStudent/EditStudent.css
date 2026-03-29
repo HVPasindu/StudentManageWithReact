@@ -1,0 +1,39 @@
+.edit_student_page {
+  min-height: 100vh;
+  background: #f7effd;
+}
+
+.edit_toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit_student_card {
+  max-width: 700px;
+  margin: auto;
+  border-radius: 18px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.edit_title {
+  text-align: center;
+  color: #6a1b9a;
+  font-weight: bold !important;
+  margin-bottom: 25px !important;
+}
+
+.form_btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .form_btns {
+    flex-direction: column;
+  }
+
+  .form_btns button {
+    width: 100%;
+  }
+}

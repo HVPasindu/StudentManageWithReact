@@ -1,84 +1,166 @@
-
-import './Login.css';
+import "./Login.css";
 import Typography from "@mui/material/Typography";
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
-import { NavLink } from "react-router-dom";
-
-import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import axios from 'axios';
-
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import { NavLink, useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Login() {
-    // const [title,setTitle] = useState("");
-    // const [body,setBody] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    // const handlePost = async ()=>{
-    //     const res = await axios.post("https://jsonplaceholder.typicode.com/posts",{
-    //         title,
-    //         body,
-    //         userId:1,
-    //     });
-
-    //     alert(JSON.stringify(res.data,null,2));
-    // }
-
-    const [email,setEmail] =useState("");
-    const [password,setPassword] =useState("");
-
-    const login = async ()=>{
-        try{
-            await axios.post("https://student-api.acpt.lk/api/login",{
-                email:email,
-                password:password
-            });
-
-            alert("Login sucssufull");
-        }catch{
-            alert("Login Faild")
-        }
+  function validate(email, password) {
+    if (email.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Email is required",
+        text: "Please enter your email address.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
     }
 
-    return (
-        <div>
-            <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh", backgroundColor: "#d7bbf2" }}>
-                    <Card sx={{ width: 450, margin: 1 }}>
-                        <Typography variant="h2" component="h2" sx={{paddingLeft:19,color:"#8320dfff"}} >
-                                Login
-                            </Typography>
-                        <CardContent>
-                            
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid email",
+        text: "Please enter a valid email address.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
-                            
-                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth onChange={(e)=>{setEmail(e.target.value)}}/>
-                            <br /><br /><br />
-                            <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth onChange={(e)=>{setPassword(e.target.value)}} type="password"
-/>
-                            
-                            <br /><br /><br />
+    if (password.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Password is required",
+        text: "Please enter your password.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
-                            <NavLink to={"/register"}>You haven't a account?</NavLink>
-                            <Button variant="contained" color="success" sx={{marginLeft:35}} onClick={login}>
-                                Login
-                            </Button>
+    if (password.length < 6) {
+      Swal.fire({
+        icon: "error",
+        title: "Weak password",
+        text: "Password must be at least 6 characters long.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
+    return true;
+  }
 
+  const login = async () => {
+    const isValid = validate(email, password);
+    if (!isValid) return;
 
-                        </CardContent>
+    try {
+      const response = await axios.post("https://student-api.acpt.lk/api/login", {
+        email,
+        password,
+      });
 
-                    </Card>
-                </div>
+      const token = response.data.token;
+      localStorage.setItem("token", token);
 
-                <div className='background right_div'>
+      await Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back!",
+        confirmButtonColor: "#7b2cbf",
+      });
 
-                </div>
+      navigate("/students");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Email or password is incorrect.",
+        confirmButtonColor: "#7b2cbf",
+      });
+    }
+  };
 
-            </div>
+  return (
+    <div>
+      <div className="login_container">
+        <div className="left_side">
+          <Card className="login_card" sx={{ margin: 1 }}>
+            <Typography
+              variant="h3"
+              component="h2"
+              sx={{
+                textAlign: "center",
+                color: "#8320dfff",
+                fontWeight: "bold",
+                mt: 2,
+              }}
+            >
+              Login
+            </Typography>
 
+            <CardContent>
+              <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <br /><br /><br />
+
+              <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+              />
+
+              <br /><br />
+
+              <NavLink to="/register" className="form_link">
+                You haven't an account? Sign Up
+              </NavLink>
+
+              <div className="btn_group">
+                <Button
+                  sx={{ mt: 2 }}
+                  className="login_btn"
+                  variant="contained"
+                  color="success"
+                  onClick={login}
+                >
+                  Login
+                </Button>
+
+                <Button
+                  sx={{ mt: 2 }}
+                  className="back_btn"
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => navigate("/")}
+                >
+                  Back to Home
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-    );
+        <div className="background right_div"></div>
+      </div>
+    </div>
+  );
 }

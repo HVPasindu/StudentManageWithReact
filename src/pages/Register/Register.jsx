@@ -1,134 +1,215 @@
-
-import './Register.css';
+import "./Register.css";
 import Typography from "@mui/material/Typography";
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
 import { NavLink, useNavigate } from "react-router-dom";
-
-import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import axios from 'axios';
-
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Register() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
-    function validate(name, email, password, confirmPassword) {
-
-        if (name === "") {
-            alert("Name is required");
-            return false;
-        }
-
-        if (email === "") {
-            alert("Email is required");
-            return false;
-        }
-
-        // ✅ email format check
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address");
-            return false;
-        }
-
-        if (password === "") {
-            alert("Password is required");
-            return false;
-        }
-
-        // ✅ numbers only & min 6 digits
-        const numberOnlyPattern = /^[0-9]{6,}$/;
-        if (!numberOnlyPattern.test(password)) {
-            alert("Password must contain at least 6 numbers only");
-            return false;
-        }
-
-        if (confirmPassword === "") {
-            alert("Confirm password is required");
-            return false;
-        }
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return false;
-        }
-
-        // all good
-        return true;
+  function validate(name, email, password, confirmPassword) {
+    if (name.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Name is required",
+        text: "Please enter your name.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
     }
 
-
-    async function handleRegister() {
-        const isValid = validate(name, email, password, confirmPassword);
-        //console.log("click")
-
-        if (!isValid) return;
-
-        try {
-            await axios.post("https://student-api.acpt.lk/api/register", {
-                name: name,
-                email: email,
-                password: password
-            });
-
-            alert("register successfull");
-            navigate("/");
-        } catch (error) {
-            alert("register Faild")
-        }
-
-
-
+    if (email.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Email is required",
+        text: "Please enter your email address.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
     }
 
-    return (
-        <div>
-            <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh", backgroundColor: "#d7bbf2" }}>
-                    <Card sx={{ width: 450, margin: 1 }}>
-                        <Typography variant="h2" component="h2" sx={{ paddingLeft: 15, color: "#8320dfff" }}>
-                            Register
-                        </Typography>
-                        <CardContent>
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid email",
+        text: "Please enter a valid email address.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
+    if (password.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Password is required",
+        text: "Please enter your password.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
-                            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth onChange={(e) => { setName(e.target.value) }} />
-                            <br /><br /><br />
-                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth onChange={(e) => { setEmail(e.target.value) }} />
-                            <br /><br /><br />
-                            <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth onChange={(e) => { setPassword(e.target.value) }} type="password"
-                            />
-                            <br /><br /><br />
-                            <TextField id="outlined-basic" label="Confirm Password" variant="outlined" fullWidth onChange={(e) => { setConfirmPassword(e.target.value) }} type="password"
-                            />
-                            <br /><br /><br />
+    if (password.length < 6) {
+      Swal.fire({
+        icon: "error",
+        title: "Weak password",
+        text: "Password must be at least 6 characters long.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
+    if (confirmPassword.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Confirm password is required",
+        text: "Please re-enter your password.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
-                            <NavLink to={"/"}>You have a account?</NavLink>
-                            <Button variant="contained" color="success" sx={{ marginLeft: 35 }} onClick={handleRegister}>
-                                Register
-                            </Button>
+    if (password !== confirmPassword) {
+      Swal.fire({
+        icon: "error",
+        title: "Passwords do not match",
+        text: "Please check your password again.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
 
+    return true;
+  }
 
+  async function handleRegister() {
+    const isValid = validate(name, email, password, confirmPassword);
+    if (!isValid) return;
 
-                        </CardContent>
+    try {
+      await axios.post("https://student-api.acpt.lk/api/register", {
+        name,
+        email,
+        password,
+      });
 
-                    </Card>
-                </div>
+      await Swal.fire({
+        icon: "success",
+        title: "Register Successful",
+        text: "Your account has been created successfully.",
+        confirmButtonColor: "#7b2cbf",
+      });
 
-                <div className='background right_div'>
+      navigate("/login");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Register Failed",
+        text: "Something went wrong. Please try again.",
+        confirmButtonColor: "#7b2cbf",
+      });
+    }
+  }
 
-                </div>
+  return (
+    <div>
+      <div className="login_container">
+        <div className="left_side">
+          <Card className="login_card" sx={{ margin: 1 }}>
+            <Typography
+              variant="h3"
+              component="h2"
+              sx={{
+                textAlign: "center",
+                color: "#8320dfff",
+                fontWeight: "bold",
+                mt: 2,
+              }}
+            >
+              Register
+            </Typography>
 
-            </div>
+            <CardContent>
+              <TextField
+                label="Name"
+                variant="outlined"
+                fullWidth
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
 
+              <br /><br /><br />
+
+              <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <br /><br /><br />
+
+              <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+              />
+
+              <br /><br /><br />
+
+              <TextField
+                label="Confirm Password"
+                variant="outlined"
+                fullWidth
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password"
+              />
+
+              <br /><br />
+
+              <NavLink to="/login" className="form_link">
+                Already have an account? Login
+              </NavLink>
+
+              <div className="btn_group">
+                <Button
+                  variant="contained"
+                  color="success"
+                  className="login_btn"
+                  onClick={handleRegister}
+                >
+                  Register
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className="back_btn"
+                  onClick={() => navigate("/")}
+                >
+                  Back to Home
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-    );
+        <div className="background right_div"></div>
+      </div>
+    </div>
+  );
 }
