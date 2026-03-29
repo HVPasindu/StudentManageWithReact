@@ -1,0 +1,82 @@
+.students_page {
+  min-height: 100vh;
+  background: #f7effd;
+}
+
+.students_toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top_btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.students_title {
+  font-weight: bold !important;
+  color: #6a1b9a;
+  text-align: center;
+  margin-bottom: 20px !important;
+}
+
+.student_card {
+  border-radius: 18px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+  transition: 0.3s;
+  height: 100%;
+}
+
+.student_card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.student_name {
+  color: #7b2cbf;
+  font-weight: bold !important;
+  margin-bottom: 14px !important;
+}
+
+.student_text {
+  color: #444;
+  margin-bottom: 10px !important;
+  line-height: 1.7;
+}
+
+.student_card_btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.empty_card {
+  border-radius: 18px !important;
+}
+
+@media (max-width: 768px) {
+  .students_toolbar {
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top_btns {
+    width: 100%;
+  }
+
+  .top_btns button {
+    flex: 1;
+  }
+
+  .student_card_btns {
+    flex-direction: column;
+  }
+
+  .student_card_btns button {
+    width: 100%;
+  }
+}
