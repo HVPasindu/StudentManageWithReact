@@ -27,7 +27,7 @@ export default function About() {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            EduManage
+            StudentHub
           </Typography>
 
           {/* Desktop Menu */}
@@ -67,7 +67,7 @@ export default function About() {
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
-            EduManage
+           StudentHub
           </Typography>
 
           <Link
@@ -103,7 +103,7 @@ export default function About() {
       <Box className="about_hero">
         <Container>
           <Typography variant="h3" className="about_title">
-            About EduManage
+            About StudentHub
           </Typography>
           <Typography className="about_subtitle">
             A modern student management platform designed to make educational
@@ -162,7 +162,7 @@ export default function About() {
             Why This Project?
           </Typography>
           <Typography sx={{ lineHeight: 1.9, mb: 3 }}>
-            EduManage is built to help users work with student records through a
+            StudentHub is built to help users work with student records through a
             professional and responsive interface. It gives a better experience
             for handling registration, login, and future student-related
             features.

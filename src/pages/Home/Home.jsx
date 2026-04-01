@@ -30,7 +30,7 @@ export default function Home() {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            EduManage
+            StudentHub
           </Typography>
 
           {/* Desktop Menu */}
@@ -73,7 +73,7 @@ export default function Home() {
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
-            EduManage
+            StudentHub
           </Typography>
 
           <Link
@@ -139,7 +139,7 @@ export default function Home() {
                   lineHeight: 1.8,
                 }}
               >
-                Welcome to EduManage. This system helps you manage student
+                Welcome to StudentHub. This system helps you manage student
                 details, registration, and records in a simple, modern, and
                 user-friendly way.
               </Typography>
@@ -231,10 +231,10 @@ export default function Home() {
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
               <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
-                Why Choose EduManage?
+                Why Choose StudentHub?
               </Typography>
               <Typography sx={{ lineHeight: 1.8 }}>
-                EduManage is built for simplicity. It helps schools,
+                StudentHub is built for simplicity. It helps schools,
                 institutions, or student management systems keep records clean,
                 organized, and accessible with a modern interface.
               </Typography>
@@ -259,7 +259,7 @@ export default function Home() {
 
       {/* FOOTER */}
       <Box className="footer_section">
-        <Typography>© 2026 EduManage | All Rights Reserved</Typography>
+        <Typography>© 2026 StudentHub | All Rights Reserved</Typography>
       </Box>
     </div>
   );
