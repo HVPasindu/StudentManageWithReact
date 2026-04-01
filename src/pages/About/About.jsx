@@ -1,8 +1,24 @@
 import "./About.css";
-import { AppBar, Toolbar, Typography, Box, Container, Grid, Card, CardContent, Button } from "@mui/material";
+import { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Button,
+  Drawer,
+  IconButton,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function About() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   return (
     <div>
       <AppBar
@@ -14,7 +30,8 @@ export default function About() {
             EduManage
           </Typography>
 
-          <Box sx={{ display: "flex", gap: 2 }}>
+          {/* Desktop Menu */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
             <Link to="/" className="top_link">Home</Link>
             <Link to="/contact" className="top_link">Contact</Link>
             <Link to="/login" className="nav_btn_link">
@@ -23,8 +40,65 @@ export default function About() {
               </Button>
             </Link>
           </Box>
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            sx={{ display: { xs: "flex", md: "none" }, color: "white" }}
+            onClick={() => setOpenDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
+        <Box
+          sx={{
+            width: 250,
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
+            EduManage
+          </Typography>
+
+          <Link
+            to="/"
+            className="top_link"
+            onClick={() => setOpenDrawer(false)}
+            style={{ color: "#6a1b9a" }}
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/contact"
+            className="top_link"
+            onClick={() => setOpenDrawer(false)}
+            style={{ color: "#6a1b9a" }}
+          >
+            Contact
+          </Link>
+
+          <Link
+            to="/login"
+            className="nav_btn_link"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <Button variant="contained" color="success" fullWidth>
+              Login
+            </Button>
+          </Link>
+        </Box>
+      </Drawer>
 
       <Box className="about_hero">
         <Container>

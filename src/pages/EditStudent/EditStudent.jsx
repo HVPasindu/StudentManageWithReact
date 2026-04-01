@@ -30,7 +30,7 @@ export default function EditStudent() {
 
     if (studentData) {
       setStudentName(studentData.student_name || "");
-      setStudentAge(studentData.student_age || "");
+      setStudentAge(String(studentData.student_age || ""));
       setStudentAddress(studentData.student_address || "");
       setStudentContact(studentData.student_contact || "");
     }
@@ -55,6 +55,16 @@ export default function EditStudent() {
       return false;
     }
 
+    if (!/^\d+$/.test(studentAge)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid age",
+        text: "Student age must contain numbers only.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
+
     if (studentAddress.trim() === "") {
       Swal.fire({
         icon: "warning",
@@ -73,11 +83,21 @@ export default function EditStudent() {
       return false;
     }
 
+    if (!/^\d{10}$/.test(studentContact)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid mobile number",
+        text: "Mobile number must contain exactly 10 digits.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
+
     return true;
   }
 
   async function updateStudent() {
-    //if (!validate()) return;
+    if (!validate()) return;
 
     try {
       await axios.put(
@@ -154,7 +174,7 @@ export default function EditStudent() {
               fullWidth
               sx={{ mb: 3 }}
               value={studentAge}
-              onChange={(e) => setStudentAge(e.target.value)}
+              onChange={(e) => setStudentAge(e.target.value.replace(/\D/g, ""))}
             />
 
             <TextField
@@ -170,7 +190,7 @@ export default function EditStudent() {
               fullWidth
               sx={{ mb: 3 }}
               value={studentContact}
-              onChange={(e) => setStudentContact(e.target.value)}
+              onChange={(e) => setStudentContact(e.target.value.replace(/\D/g, ""))}
             />
 
             <Box className="form_btns">
