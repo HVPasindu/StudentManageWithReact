@@ -10,6 +10,7 @@ import Students from "./pages/Students/Students";
 import AddStudent from "./pages/AddStudent/AddStudent";
 import EditStudent from "./pages/EditStudent/EditStudent";
 import Contact from "./pages/Contact.jsx/Contact";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="/students" element={<Students/>} />
       <Route path="/add-student" element={<AddStudent/>} />
       <Route path="/edit-student/:id" element={<EditStudent/>} />
+
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }

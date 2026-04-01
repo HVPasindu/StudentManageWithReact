@@ -26,6 +26,10 @@ export default function EditStudent() {
   const [studentContact, setStudentContact] = useState("");
 
   useEffect(() => {
+    if (!token) {
+            navigate("/login");
+            return;
+        }
     const studentData = JSON.parse(localStorage.getItem("editStudent"));
 
     if (studentData) {

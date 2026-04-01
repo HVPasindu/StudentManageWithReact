@@ -1,5 +1,5 @@
 import "./AddStudent.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   AppBar,
@@ -20,9 +20,17 @@ export default function AddStudent() {
   const [studentAge, setStudentAge] = useState("");
   const [studentAddress, setStudentAddress] = useState("");
   const [studentContact, setStudentContact] = useState("");
+  
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
+  useEffect(()=>{
+    if (!token) {
+            navigate("/login");
+            return;
+        }
+  },[])
 
   function validate() {
     if (studentName.trim() === "") {
