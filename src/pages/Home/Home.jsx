@@ -1,266 +1,179 @@
 import "./Home.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  Container,
-  Typography,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  Drawer,
-} from "@mui/material";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [time, setTime] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    function tick() {
+      const now = new Date();
+      setTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+    }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <div>
-      {/* NAVBAR */}
-      <AppBar
-        position="sticky"
-        sx={{
-          background: "linear-gradient(90deg, #7b2cbf, #9d4edd)",
-          boxShadow: 3,
-        }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            StudentHub
-          </Typography>
+    <div className="home_desktop">
+      {/* ===== MAIN WINDOW ===== */}
+      <div className="home_main_window win-window">
+        {/* Title Bar */}
+        <div className="win-titlebar">
+          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <span className="win-titlebar-icon">S</span>
+            <span>StudentHub - Home</span>
+          </div>
+          <div className="win-titlebar-controls">
+            <span className="win-titlebar-btn">_</span>
+            <span className="win-titlebar-btn">&#9633;</span>
+            <span className="win-titlebar-btn" style={{ fontWeight: "bold", color: "#900" }}>&#x2715;</span>
+          </div>
+        </div>
 
-          {/* Desktop Menu */}
-          <Box
-            className="nav_links"
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Link to="/" className="nav_link">Home</Link>
-            <Link to="/about" className="nav_link">About</Link>
-            <Link to="/contact" className="nav_link">Contact</Link>
-            <Link to="/login" className="nav_btn_link">
-              <Button variant="contained" color="success">
-                Login
-              </Button>
-            </Link>
-          </Box>
+        {/* Menu Bar */}
+        <div className="win-menubar">
+          <span className="win-menu-item">File</span>
+          <span className="win-menu-item">Edit</span>
+          <span className="win-menu-item">View</span>
+          <Link to="/about" className="win-menu-item">About</Link>
+          <Link to="/contact" className="win-menu-item">Contact</Link>
+          <span className="win-menu-item">Help</span>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <IconButton
-            sx={{ display: { xs: "flex", md: "none" }, color: "white" }}
-            onClick={() => setOpenDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+        {/* Toolbar Strip */}
+        <div className="home_toolbar win-panel-raised">
+          <Link to="/" className="win-btn" style={{ fontSize: "11px" }}>Home</Link>
+          <Link to="/about" className="win-btn" style={{ fontSize: "11px" }}>About</Link>
+          <Link to="/contact" className="win-btn" style={{ fontSize: "11px" }}>Contact</Link>
+          <div className="home_toolbar_sep"></div>
+          <Link to="/login" className="win-btn primary" style={{ fontSize: "11px" }}>Login</Link>
+          <Link to="/register" className="win-btn" style={{ fontSize: "11px" }}>Register</Link>
+        </div>
 
-      <Drawer
-        anchor="left"
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-      >
-        <Box
-          sx={{
-            width: 250,
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
-            StudentHub
-          </Typography>
+        {/* Main Content Area */}
+        <div className="home_content_area">
+          {/* Sidebar */}
+          <div className="home_sidebar win-panel">
+            <div className="home_sidebar_section">
+              <div className="home_sidebar_title">Navigation</div>
+              <Link to="/" className="home_sidebar_link active">Home</Link>
+              <Link to="/about" className="home_sidebar_link">About</Link>
+              <Link to="/contact" className="home_sidebar_link">Contact</Link>
+              <hr className="win-separator" />
+              <Link to="/login" className="home_sidebar_link">Login</Link>
+              <Link to="/register" className="home_sidebar_link">Register</Link>
+              <Link to="/students" className="home_sidebar_link">Students</Link>
+            </div>
 
-          <Link
-            to="/"
-            className="nav_link"
-            onClick={() => setOpenDrawer(false)}
-            style={{ color: "#6a1b9a" }}
-          >
-            Home
-          </Link>
+            <hr className="win-separator" />
 
-          <Link
-            to="/about"
-            className="nav_link"
-            onClick={() => setOpenDrawer(false)}
-            style={{ color: "#6a1b9a" }}
-          >
-            About
-          </Link>
+            <div className="home_sidebar_section">
+              <div className="home_sidebar_title">System Info</div>
+              <div className="home_sidebar_info">Version: 1.0.0</div>
+              <div className="home_sidebar_info">Build: 2000</div>
+              <div className="home_sidebar_info">User: Guest</div>
+            </div>
+          </div>
 
-          <Link
-            to="/contact"
-            className="nav_link"
-            onClick={() => setOpenDrawer(false)}
-            style={{ color: "#6a1b9a" }}
-          >
-            Contact
-          </Link>
+          {/* Main Panel */}
+          <div className="home_main_panel">
+            {/* Hero Group Box */}
+            <div className="win-group-box">
+              <span className="win-group-label">Welcome to StudentHub</span>
+              <div className="home_hero_inner">
+                <div className="home_hero_text">
+                  <div className="home_hero_title">Manage Students Easily and Smartly</div>
+                  <p className="home_hero_desc">
+                    Welcome to StudentHub. This system helps you manage student
+                    details, registration, and records in a simple, organized,
+                    and user-friendly way.
+                  </p>
+                  <div className="home_hero_btns">
+                    <Link to="/login" className="win-btn primary">Get Started</Link>
+                    <Link to="/register" className="win-btn">Sign Up</Link>
+                  </div>
+                </div>
+                <div className="home_hero_logo">
+                  <div className="home_logo_box">
+                    <div className="home_logo_icon">S</div>
+                    <div className="home_logo_text">StudentHub</div>
+                    <div className="home_logo_ver">v1.0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <Link
-            to="/login"
-            className="nav_btn_link"
-            onClick={() => setOpenDrawer(false)}
-          >
-            <Button variant="contained" color="success" fullWidth>
-              Login
-            </Button>
-          </Link>
-        </Box>
-      </Drawer>
+            <div style={{ height: "12px" }} />
 
-      {/* HERO SECTION */}
-      <Box className="hero_section">
-        <Container>
-          <Grid container spacing={5} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography
-                variant="h3"
-                sx={{
-                  fontWeight: "bold",
-                  color: "#6a1b9a",
-                  mb: 2,
-                }}
-              >
-                Manage Students Easily and Smartly
-              </Typography>
+            {/* Features Group Box */}
+            <div className="win-group-box">
+              <span className="win-group-label">Features</span>
+              <div className="home_features_grid">
+                <div className="win-panel home_feature_item">
+                  <div className="home_feature_icon">[M]</div>
+                  <div className="home_feature_title">Student Management</div>
+                  <div className="home_feature_desc">Add, update, and manage student information quickly and easily.</div>
+                </div>
+                <div className="win-panel home_feature_item">
+                  <div className="home_feature_icon">[S]</div>
+                  <div className="home_feature_title">Secure Login</div>
+                  <div className="home_feature_desc">Authentication system with register and login functionality.</div>
+                </div>
+                <div className="win-panel home_feature_item">
+                  <div className="home_feature_icon">[UI]</div>
+                  <div className="home_feature_title">Simple Interface</div>
+                  <div className="home_feature_desc">Clean design that works well on desktop and mobile devices.</div>
+                </div>
+              </div>
+            </div>
 
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "#444",
-                  mb: 4,
-                  lineHeight: 1.8,
-                }}
-              >
-                Welcome to StudentHub. This system helps you manage student
-                details, registration, and records in a simple, modern, and
-                user-friendly way.
-              </Typography>
+            <div style={{ height: "12px" }} />
 
-              <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-                <Link to="/login" className="hero_btn_link">
-                  <Button variant="contained" color="success" size="large">
-                    Get Started
-                  </Button>
-                </Link>
+            {/* Why Choose Box */}
+            <div className="win-group-box">
+              <span className="win-group-label">Why Choose StudentHub?</span>
+              <div className="home_why_grid">
+                <p className="home_why_desc">
+                  StudentHub is built for simplicity. It helps schools, institutions,
+                  or student management systems keep records clean, organized, and
+                  accessible.
+                </p>
+                <div className="win-panel home_highlights_panel">
+                  <div className="home_highlights_title">Quick Highlights</div>
+                  <div className="home_highlight_row">&#9658; Easy student registration</div>
+                  <div className="home_highlight_row">&#9658; Secure user login</div>
+                  <div className="home_highlight_row">&#9658; Responsive design</div>
+                  <div className="home_highlight_row">&#9658; Modern and clean UI</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <Link to="/register" className="hero_btn_link">
-                  <Button variant="outlined" color="secondary" size="large">
-                    Sign Up
-                  </Button>
-                </Link>
-              </Box>
-            </Grid>
+        {/* Status Bar */}
+        <div className="win-statusbar">
+          <div className="win-statusbar-item">Ready</div>
+          <div className="win-statusbar-item">StudentHub v1.0</div>
+          <div className="win-statusbar-item">© 2026 StudentHub</div>
+        </div>
+      </div>
 
-            <Grid item xs={12} md={6}>
-              <img
-                src="/home.png"
-                alt="home"
-                className="hero_image"
-              />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* FEATURES */}
-      <Container sx={{ py: 8 }}>
-        <Typography
-          variant="h4"
-          align="center"
-          sx={{ fontWeight: "bold", color: "#6a1b9a", mb: 5 }}
-        >
-          Our Features
-        </Typography>
-
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card className="feature_card">
-              <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                  Student Management
-                </Typography>
-                <Typography>
-                  Add, update, and manage student information quickly and
-                  easily.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <Card className="feature_card">
-              <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                  Secure Login
-                </Typography>
-                <Typography>
-                  Authentication system with register and login functionality
-                  for users.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <Card className="feature_card">
-              <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                  Simple Interface
-                </Typography>
-                <Typography>
-                  Clean and responsive design that works nicely on desktop and
-                  mobile devices.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* ABOUT PREVIEW */}
-      <Box className="about_preview">
-        <Container>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
-                Why Choose StudentHub?
-              </Typography>
-              <Typography sx={{ lineHeight: 1.8 }}>
-                StudentHub is built for simplicity. It helps schools,
-                institutions, or student management systems keep records clean,
-                organized, and accessible with a modern interface.
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Card className="info_card">
-                <CardContent>
-                  <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-                    Quick Highlights
-                  </Typography>
-                  <Typography sx={{ mb: 1 }}>✔ Easy student registration</Typography>
-                  <Typography sx={{ mb: 1 }}>✔ Secure user login</Typography>
-                  <Typography sx={{ mb: 1 }}>✔ Responsive mobile design</Typography>
-                  <Typography>✔ Modern and clean UI</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* FOOTER */}
-      <Box className="footer_section">
-        <Typography>© 2026 StudentHub | All Rights Reserved</Typography>
-      </Box>
+      {/* Taskbar */}
+      <div className="win-taskbar">
+        <button className="win-start-btn">
+          <span style={{ fontStyle: "italic" }}>Start</span>
+        </button>
+        <div className="win-taskbar-separator"></div>
+        <div className="win-taskbar-task">
+          <span className="win-titlebar-icon" style={{ width: 12, height: 12, fontSize: 8 }}>S</span>
+          StudentHub - Home
+        </div>
+        <div className="win-taskbar-clock">{time}</div>
+      </div>
     </div>
   );
 }

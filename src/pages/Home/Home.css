@@ -1,90 +1,293 @@
-.nav_links {
+/* ===== HOME PAGE - WIN2000 STYLE ===== */
+
+.home_desktop {
+  min-height: 100vh;
+  background-color: #008080;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 12px 40px;
+}
+
+.home_main_window {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--win-bg);
+  min-height: calc(100vh - 60px);
+}
+
+/* Toolbar */
+.home_toolbar {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 4px;
+  padding: 4px 6px;
   flex-wrap: wrap;
 }
 
-.nav_link {
+.home_toolbar_sep {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  margin: 0 4px;
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+}
+
+/* Content Area */
+.home_content_area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.home_sidebar {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 6px;
+  border-right: 1px solid var(--win-btn-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.home_sidebar_section {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.home_sidebar_title {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--win-accent);
+  padding: 2px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--win-btn-shadow);
+  margin-bottom: 2px;
+}
+
+.home_sidebar_link {
+  font-size: 11px;
+  color: var(--win-text);
+  text-decoration: none;
+  padding: 2px 6px;
+  display: block;
+  cursor: pointer;
+}
+
+.home_sidebar_link:hover,
+.home_sidebar_link.active {
+  background-color: var(--win-selected);
+  color: var(--win-selected-text);
+}
+
+.home_sidebar_info {
+  font-size: 10px;
+  color: #555;
+  padding: 1px 4px;
+}
+
+/* Main Panel */
+.home_main_panel {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background-color: var(--win-bg);
+}
+
+/* Hero */
+.home_hero_inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+.home_hero_text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.home_hero_title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--win-accent);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.home_hero_desc {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.home_hero_btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.home_hero_logo {
+  flex-shrink: 0;
+}
+
+.home_logo_box {
+  width: 120px;
+  background-color: var(--win-input-bg);
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 8px;
+  gap: 4px;
+}
+
+.home_logo_icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--win-accent), #3a7bd5);
   color: white;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 18px;
-  display: inline-block;
-  transition: 0.3s;
-}
-
-.nav_link:hover {
-  background-color: aqua;
-  color: black;
-  border-radius: 40px;
-  
-}
-
-.nav_btn_link,
-.hero_btn_link {
-  text-decoration: none;
-}
-
-.hero_section {
-  min-height: 90vh;
+  font-size: 22px;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #f3e5f5, #ffffff);
-  padding: 50px 0;
+  justify-content: center;
+  border-top: 2px solid #3a7bd5;
+  border-left: 2px solid #3a7bd5;
+  border-right: 2px solid #0a246a;
+  border-bottom: 2px solid #0a246a;
 }
 
-.hero_image {
-  width: 100%;
-  max-width: 550px;
-  display: block;
-  margin: auto;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+.home_logo_text {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--win-accent);
 }
 
-.feature_card {
-  height: 100%;
-  text-align: center;
-  border-radius: 18px !important;
-  transition: 0.3s;
-  padding: 16px;
+.home_logo_ver {
+  font-size: 9px;
+  color: #777;
 }
 
-.feature_card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+/* Features */
+.home_features_grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 0;
 }
 
-.about_preview {
-  background: #f8f2fc;
-  padding: 80px 0;
+.home_feature_item {
+  flex: 1;
+  min-width: 130px;
+  padding: 10px;
 }
 
-.info_card {
-  border-radius: 18px !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+.home_feature_icon {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--win-accent);
+  margin-bottom: 4px;
 }
 
-.footer_section {
-  background: linear-gradient(90deg, #7b2cbf, #9d4edd);
-  color: white;
-  text-align: center;
-  padding: 22px;
-  margin-top: 0;
+.home_feature_title {
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-@media (max-width: 768px) {
-  .nav_links {
-    gap: 12px;
+.home_feature_desc {
+  font-size: 10px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Why Section */
+.home_why_grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  align-items: flex-start;
+}
+
+.home_why_desc {
+  flex: 1;
+  min-width: 180px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.home_highlights_panel {
+  flex: 1;
+  min-width: 160px;
+  padding: 8px;
+}
+
+.home_highlights_title {
+  font-weight: bold;
+  font-size: 11px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--win-btn-shadow);
+  padding-bottom: 2px;
+}
+
+.home_highlight_row {
+  font-size: 11px;
+  padding: 2px 0;
+  color: #222;
+}
+
+/* Taskbar task button */
+.win-taskbar-task {
+  background-color: var(--win-btn-face);
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
+  font-size: 11px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.win-taskbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+  margin: 0 2px;
+}
+
+@media (max-width: 600px) {
+  .home_sidebar {
+    display: none;
   }
-
-  .hero_section {
-    text-align: center;
-    padding: 40px 0;
+  .home_features_grid {
+    flex-direction: column;
   }
-
-  .hero_image {
-    margin-top: 20px;
+  .home_why_grid {
+    flex-direction: column;
+  }
+  .home_hero_inner {
+    flex-direction: column;
+  }
+  .home_logo_box {
+    width: 100%;
   }
 }

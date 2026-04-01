@@ -1,0 +1,18 @@
+/* App-level overrides to suppress MUI default styles that conflict with Win2000 theme */
+
+/* Ensure MUI components don't override our font */
+* {
+  font-family: 'Tahoma', 'MS Sans Serif', Arial, sans-serif !important;
+}
+
+/* Remove MUI box-shadows from Paper/Card elements */
+.MuiPaper-root,
+.MuiCard-root {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Suppress MUI AppBar styles - our pages handle their own navbars */
+.MuiAppBar-root {
+  display: none !important;
+}

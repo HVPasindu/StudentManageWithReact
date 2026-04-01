@@ -1,221 +1,154 @@
 import "./Contact.css";
-import { useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Button,
-  Drawer,
-  IconButton,
-} from "@mui/material";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Contact() {
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    function tick() {
+      const now = new Date();
+      setTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+    }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div>
-      <AppBar
-        position="sticky"
-        sx={{ background: "linear-gradient(90deg, #7b2cbf, #9d4edd)" }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            EduManage
-          </Typography>
+    <div className="contact_desktop">
+      <div className="contact_main_window win-window">
+        {/* Title Bar */}
+        <div className="win-titlebar">
+          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <span className="win-titlebar-icon">C</span>
+            <span>StudentHub - Contact Us</span>
+          </div>
+          <div className="win-titlebar-controls">
+            <span className="win-titlebar-btn">_</span>
+            <span className="win-titlebar-btn">&#9633;</span>
+            <span className="win-titlebar-btn" style={{ fontWeight: "bold", color: "#900" }}>&#x2715;</span>
+          </div>
+        </div>
 
-          {/* Desktop Menu */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            <Link to="/" className="contact_top_link">Home</Link>
-            <Link to="/about" className="contact_top_link">About</Link>
-            <Link to="/login" className="nav_btn_link">
-              <Button variant="contained" color="success">
-                Login
-              </Button>
-            </Link>
-          </Box>
+        {/* Menu Bar */}
+        <div className="win-menubar">
+          <Link to="/" className="win-menu-item">File</Link>
+          <span className="win-menu-item">Edit</span>
+          <span className="win-menu-item">View</span>
+          <Link to="/" className="win-menu-item">Home</Link>
+          <Link to="/about" className="win-menu-item">About</Link>
+          <span className="win-menu-item">Help</span>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <IconButton
-            sx={{ display: { xs: "flex", md: "none" }, color: "white" }}
-            onClick={() => setOpenDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+        {/* Toolbar */}
+        <div className="win-panel-raised contact_toolbar">
+          <Link to="/" className="win-btn">&#9664; Back</Link>
+          <Link to="/" className="win-btn">Home</Link>
+          <Link to="/about" className="win-btn">About</Link>
+          <div className="contact_toolbar_sep"></div>
+          <Link to="/login" className="win-btn primary">Login</Link>
+          <Link to="/register" className="win-btn">Register</Link>
+        </div>
 
-      {/* Mobile Drawer */}
-      <Drawer
-        anchor="left"
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-      >
-        <Box
-          sx={{
-            width: 250,
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
-            EduManage
-          </Typography>
+        {/* Header */}
+        <div className="contact_header_bar">
+          <div className="contact_header_icon">[C]</div>
+          <div>
+            <div className="contact_header_title">Contact Us</div>
+            <div className="contact_header_sub">We are here to help you</div>
+          </div>
+        </div>
 
-          <Link
-            to="/"
-            className="contact_top_link"
-            onClick={() => setOpenDrawer(false)}
-            style={{ color: "#6a1b9a" }}
-          >
-            Home
-          </Link>
+        <hr className="win-separator" style={{ margin: "0 12px" }} />
 
-          <Link
-            to="/about"
-            className="contact_top_link"
-            onClick={() => setOpenDrawer(false)}
-            style={{ color: "#6a1b9a" }}
-          >
-            About
-          </Link>
+        {/* Body */}
+        <div className="contact_body">
+          {/* Contact Info Cards */}
+          <div className="contact_cards_row">
+            <div className="win-window contact_card">
+              <div className="win-titlebar" style={{ fontSize: "10px", padding: "3px 6px" }}>
+                <span>Email</span>
+              </div>
+              <div className="contact_card_body">
+                <div className="contact_card_value">support@studenthub.com</div>
+                <div className="contact_card_note">For general questions and support</div>
+              </div>
+            </div>
 
-          <Link
-            to="/login"
-            className="nav_btn_link"
-            onClick={() => setOpenDrawer(false)}
-          >
-            <Button variant="contained" color="success" fullWidth>
-              Login
-            </Button>
-          </Link>
-        </Box>
-      </Drawer>
+            <div className="win-window contact_card">
+              <div className="win-titlebar" style={{ fontSize: "10px", padding: "3px 6px" }}>
+                <span>Phone</span>
+              </div>
+              <div className="contact_card_body">
+                <div className="contact_card_value">+94 71 234 5678</div>
+                <div className="contact_card_note">Call us during working hours</div>
+              </div>
+            </div>
 
-      <Box className="contact_hero">
-        <Container>
-          <Typography variant="h3" className="contact_title">
-            Contact Us
-          </Typography>
-          <Typography className="contact_subtitle">
-            We are here to help you. You can reach us through the details below.
-          </Typography>
-        </Container>
-      </Box>
+            <div className="win-window contact_card">
+              <div className="win-titlebar" style={{ fontSize: "10px", padding: "3px 6px" }}>
+                <span>Address</span>
+              </div>
+              <div className="contact_card_body">
+                <div className="contact_card_value">Colombo, Sri Lanka</div>
+                <div className="contact_card_note">Main office location</div>
+              </div>
+            </div>
+          </div>
 
-      <Container sx={{ py: 8 }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card className="contact_card">
-              <CardContent>
-                <Typography variant="h5" className="card_title">
-                  Email
-                </Typography>
-                <Typography className="card_text">
-                  support@edumanage.com
-                </Typography>
-                <Typography className="card_subtext">
-                  For general questions and support
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Office Hours + Quick Actions */}
+          <div className="contact_bottom_row">
+            <div className="win-group-box contact_hours_box">
+              <span className="win-group-label">Office Hours</span>
+              <table className="win-table" style={{ marginTop: "6px" }}>
+                <tbody>
+                  <tr>
+                    <td style={{ fontWeight: "bold" }}>Monday - Friday</td>
+                    <td>8:30 AM - 5:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: "bold" }}>Saturday</td>
+                    <td>9:00 AM - 1:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: "bold" }}>Sunday</td>
+                    <td>Closed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <Grid item xs={12} md={4}>
-            <Card className="contact_card">
-              <CardContent>
-                <Typography variant="h5" className="card_title">
-                  Phone
-                </Typography>
-                <Typography className="card_text">
-                  +94 71 234 5678
-                </Typography>
-                <Typography className="card_subtext">
-                  Call us during working hours
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+            <div className="win-group-box contact_actions_box">
+              <span className="win-group-label">Quick Actions</span>
+              <div className="contact_action_btns">
+                <Link to="/login" className="win-btn primary">Go to Login</Link>
+                <Link to="/register" className="win-btn">Create Account</Link>
+                <Link to="/" className="win-btn">Back to Home</Link>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <Grid item xs={12} md={4}>
-            <Card className="contact_card">
-              <CardContent>
-                <Typography variant="h5" className="card_title">
-                  Address
-                </Typography>
-                <Typography className="card_text">
-                  Colombo, Sri Lanka
-                </Typography>
-                <Typography className="card_subtext">
-                  Main office location
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        {/* Status Bar */}
+        <div className="win-statusbar">
+          <div className="win-statusbar-item">Contact - StudentHub</div>
+          <div className="win-statusbar-item">Ready</div>
+        </div>
+      </div>
 
-        <Box className="contact_bottom_section">
-          <Typography variant="h4" className="bottom_title">
-            Office Hours
-          </Typography>
-
-          <Grid container spacing={3} sx={{ mt: 1 }}>
-            <Grid item xs={12} md={6}>
-              <Card className="contact_card">
-                <CardContent>
-                  <Typography className="hours_text">
-                    Monday - Friday : 8.30 AM - 5.00 PM
-                  </Typography>
-                  <Typography className="hours_text">
-                    Saturday : 9.00 AM - 1.00 PM
-                  </Typography>
-                  <Typography className="hours_text">
-                    Sunday : Closed
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Card className="contact_card">
-                <CardContent>
-                  <Typography variant="h6" className="card_title" sx={{ mb: 2 }}>
-                    Quick Actions
-                  </Typography>
-
-                  <Box className="quick_btns">
-                    <Link to="/login" className="btn_link">
-                      <Button variant="contained" color="secondary" fullWidth>
-                        Go to Login
-                      </Button>
-                    </Link>
-
-                    <Link to="/register" className="btn_link">
-                      <Button variant="outlined" color="secondary" fullWidth>
-                        Create Account
-                      </Button>
-                    </Link>
-
-                    <Link to="/" className="btn_link">
-                      <Button variant="text" color="secondary" fullWidth>
-                        Back to Home
-                      </Button>
-                    </Link>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
+      {/* Taskbar */}
+      <div className="win-taskbar">
+        <button className="win-start-btn">
+          <span style={{ fontStyle: "italic" }}>Start</span>
+        </button>
+        <div className="win-taskbar-separator"></div>
+        <div className="win-taskbar-task">
+          <span className="win-titlebar-icon" style={{ width: 12, height: 12, fontSize: 8 }}>C</span>
+          StudentHub - Contact
+        </div>
+        <div className="win-taskbar-clock">{time}</div>
+      </div>
     </div>
   );
 }

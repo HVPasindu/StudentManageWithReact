@@ -1,89 +1,173 @@
-.background {
-  height: 100vh;
-  width: 100%;
-  background-image: url("/register_bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+/* ===== LOGIN PAGE - WIN2000 STYLE ===== */
 
-.right_div {
-  width: 60%;
-  height: 100vh;
-}
-
-.login_container {
+.login_desktop {
+  min-height: 100vh;
+  background-color: #008080;
   display: flex;
-  width: 100%;
-  height: 100vh;
-}
-
-.left_side {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 40%;
-  height: 100vh;
-  background-color: #d7bbf2;
+  justify-content: center;
+  padding-bottom: 34px;
+  position: relative;
 }
 
-.login_card {
-  width: 450px;
-  border-radius: 18px !important;
-}
-
-.form_link {
-  text-decoration: none;
-  color: #6a1b9a;
-  font-weight: 500;
-}
-
-.form_link:hover {
-  text-decoration: underline;
-}
-
-.btn_group {
+.login_desktop_icons {
+  position: absolute;
+  top: 16px;
+  left: 16px;
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.login_btn,
-.back_btn {
+.login_desktop_icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  width: 60px;
+}
+
+.login_desktop_icon_img {
+  width: 36px;
+  height: 36px;
+  background: var(--win-bg);
+  border-top: 2px solid var(--win-btn-highlight);
+  border-left: 2px solid var(--win-btn-highlight);
+  border-right: 2px solid var(--win-btn-shadow);
+  border-bottom: 2px solid var(--win-btn-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--win-accent);
+}
+
+.login_desktop_icon_label {
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Dialog */
+.login_dialog {
+  width: 420px;
+  background-color: var(--win-bg);
+}
+
+.login_dialog_body {
+  display: flex;
+  gap: 0;
+}
+
+/* Logo Panel */
+.login_logo_panel {
+  width: 110px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 8px;
+  gap: 6px;
+  background: #c0c8d8;
+  border-right: 2px solid var(--win-btn-shadow);
+}
+
+.login_logo_icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--win-accent), #3a7bd5);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #5599ee;
+  border-left: 2px solid #5599ee;
+  border-right: 2px solid #06144a;
+  border-bottom: 2px solid #06144a;
+  margin-bottom: 4px;
+}
+
+.login_logo_appname {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--win-accent);
+  text-align: center;
+}
+
+.login_logo_version {
+  font-size: 9px;
+  color: #444;
+}
+
+.login_logo_tagline {
+  font-size: 9px;
+  color: #444;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Form Panel */
+.login_form_panel {
   flex: 1;
+  padding: 12px 14px;
 }
 
-@media (max-width: 768px) {
-  .login_container {
-    display: block;
-    height: auto;
-  }
+.login_form_title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--win-accent);
+  margin-bottom: 6px;
+}
 
-  .left_side {
-    width: 100%;
-    height: 100vh;
-    background-image: url("/back_mob.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+.login_form_link_row {
+  margin: 6px 0 8px;
+}
 
-  .right_div {
+.login_form_btns {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+/* Shared taskbar task class */
+.win-taskbar-task {
+  background-color: var(--win-btn-face);
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
+  font-size: 11px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.win-taskbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+  margin: 0 2px;
+}
+
+@media (max-width: 480px) {
+  .login_dialog {
+    width: 95vw;
+  }
+  .login_logo_panel {
+    width: 80px;
+  }
+  .login_desktop_icons {
     display: none;
-  }
-
-  .login_card {
-    width: 90%;
-    max-width: 450px;
-  }
-
-  .btn_group {
-    flex-direction: column;
-  }
-
-  .login_btn,
-  .back_btn {
-    width: 100%;
   }
 }
