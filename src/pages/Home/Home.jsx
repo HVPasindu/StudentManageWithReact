@@ -1,4 +1,7 @@
 import "./Home.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   Container,
   Typography,
@@ -9,10 +12,12 @@ import {
   AppBar,
   Toolbar,
   Box,
+  IconButton,
+  Drawer,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 
 export default function Home() {
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <div>
       {/* NAVBAR */}
@@ -28,7 +33,11 @@ export default function Home() {
             EduManage
           </Typography>
 
-          <Box className="nav_links">
+          {/* Desktop Menu */}
+          <Box
+            className="nav_links"
+            sx={{ display: { xs: "none", md: "flex" } }}
+          >
             <Link to="/" className="nav_link">Home</Link>
             <Link to="/about" className="nav_link">About</Link>
             <Link to="/contact" className="nav_link">Contact</Link>
@@ -38,8 +47,73 @@ export default function Home() {
               </Button>
             </Link>
           </Box>
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            sx={{ display: { xs: "flex", md: "none" }, color: "white" }}
+            onClick={() => setOpenDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
+        <Box
+          sx={{
+            width: 250,
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
+            EduManage
+          </Typography>
+
+          <Link
+            to="/"
+            className="nav_link"
+            onClick={() => setOpenDrawer(false)}
+            style={{ color: "#6a1b9a" }}
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/about"
+            className="nav_link"
+            onClick={() => setOpenDrawer(false)}
+            style={{ color: "#6a1b9a" }}
+          >
+            About
+          </Link>
+
+          <Link
+            to="/contact"
+            className="nav_link"
+            onClick={() => setOpenDrawer(false)}
+            style={{ color: "#6a1b9a" }}
+          >
+            Contact
+          </Link>
+
+          <Link
+            to="/login"
+            className="nav_btn_link"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <Button variant="contained" color="success" fullWidth>
+              Login
+            </Button>
+          </Link>
+        </Box>
+      </Drawer>
 
       {/* HERO SECTION */}
       <Box className="hero_section">

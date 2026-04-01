@@ -43,6 +43,16 @@ export default function AddStudent() {
       return false;
     }
 
+    if (!/^\d+$/.test(studentAge)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid age",
+        text: "Student age must contain numbers only.",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
+
     if (studentAddress.trim() === "") {
       Swal.fire({
         icon: "warning",
@@ -56,6 +66,16 @@ export default function AddStudent() {
       Swal.fire({
         icon: "warning",
         title: "Student contact is required",
+        confirmButtonColor: "#7b2cbf",
+      });
+      return false;
+    }
+
+    if (!/^\d{10}$/.test(studentContact)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid mobile number",
+        text: "Mobile number must contain exactly 10 digits.",
         confirmButtonColor: "#7b2cbf",
       });
       return false;
@@ -139,7 +159,7 @@ export default function AddStudent() {
               fullWidth
               sx={{ mb: 3 }}
               value={studentAge}
-              onChange={(e) => setStudentAge(e.target.value)}
+              onChange={(e) => setStudentAge(e.target.value.replace(/\D/g, ""))}
             />
 
             <TextField
@@ -155,7 +175,7 @@ export default function AddStudent() {
               fullWidth
               sx={{ mb: 3 }}
               value={studentContact}
-              onChange={(e) => setStudentContact(e.target.value)}
+              onChange={(e) => setStudentContact(e.target.value.replace(/\D/g, ""))}
             />
 
             <Box className="form_btns">
@@ -163,7 +183,11 @@ export default function AddStudent() {
                 Save Student
               </Button>
 
-              <Button variant="outlined" color="secondary" onClick={() => navigate("/students")}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => navigate("/students")}
+              >
                 Cancel
               </Button>
             </Box>
