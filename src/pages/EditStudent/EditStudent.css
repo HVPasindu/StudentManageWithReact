@@ -1,39 +1,62 @@
-.edit_student_page {
+/* ===== EDIT STUDENT PAGE - WIN2000 STYLE ===== */
+
+.edit_desktop {
   min-height: 100vh;
-  background: #f7effd;
+  background-color: #008080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 34px;
+  padding-top: 16px;
+}
+
+.edit_dialog {
+  width: 480px;
+  background-color: var(--win-bg);
 }
 
 .edit_toolbar {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
 }
 
-.edit_student_card {
-  max-width: 700px;
-  margin: auto;
-  border-radius: 18px !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+.edit_body {
+  padding: 12px;
 }
 
-.edit_title {
-  text-align: center;
-  color: #6a1b9a;
-  font-weight: bold !important;
-  margin-bottom: 25px !important;
-}
-
-.form_btns {
+.edit_form_btns {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
 }
 
-@media (max-width: 768px) {
-  .form_btns {
-    flex-direction: column;
-  }
+.win-taskbar-task {
+  background-color: var(--win-btn-face);
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
+  font-size: 11px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+  cursor: pointer;
+}
 
-  .form_btns button {
-    width: 100%;
+.win-taskbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+  margin: 0 2px;
+}
+
+@media (max-width: 520px) {
+  .edit_dialog {
+    width: 95vw;
   }
 }

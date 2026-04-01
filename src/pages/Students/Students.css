@@ -1,82 +1,166 @@
-.students_page {
+/* ===== STUDENTS PAGE - WIN2000 STYLE ===== */
+
+.students_desktop {
   min-height: 100vh;
-  background: #f7effd;
+  background-color: #008080;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 12px 40px;
+}
+
+.students_main_window {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--win-bg);
+  min-height: calc(100vh - 60px);
 }
 
 .students_toolbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-}
-
-.top_btns {
-  display: flex;
-  gap: 12px;
+  gap: 4px;
+  padding: 4px 6px;
   flex-wrap: wrap;
 }
 
-.students_title {
-  font-weight: bold !important;
-  color: #6a1b9a;
+.students_toolbar_sep {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  margin: 0 4px;
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+}
+
+.students_content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.students_sidebar {
+  width: 140px;
+  flex-shrink: 0;
+  padding: 6px;
+  border-right: 1px solid var(--win-btn-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.students_sidebar_title {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--win-accent);
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--win-btn-shadow);
+  margin-bottom: 2px;
+}
+
+.students_sidebar_link {
+  font-size: 11px;
+  color: var(--win-text);
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.students_sidebar_link:hover,
+.students_sidebar_link.active {
+  background-color: var(--win-selected);
+  color: var(--win-selected-text);
+}
+
+.students_sidebar_info {
+  font-size: 10px;
+  color: #555;
+  padding: 1px 4px;
+}
+
+/* List Area */
+.students_list_area {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  background-color: var(--win-bg);
+}
+
+.students_table {
+  font-size: 11px;
+}
+
+.students_row_btns {
+  display: flex;
+  gap: 3px;
+}
+
+/* Empty state */
+.students_empty_panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px;
+  margin: 20px;
   text-align: center;
-  margin-bottom: 20px !important;
 }
 
-.student_card {
-  border-radius: 18px !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
-  transition: 0.3s;
-  height: 100%;
-}
-
-.student_card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
-}
-
-.student_name {
-  color: #7b2cbf;
-  font-weight: bold !important;
-  margin-bottom: 14px !important;
-}
-
-.student_text {
-  color: #444;
-  margin-bottom: 10px !important;
-  line-height: 1.7;
-}
-
-.student_card_btns {
+.students_empty_icon {
+  font-size: 24px;
+  font-weight: bold;
+  color: #888;
+  width: 48px;
+  height: 48px;
   display: flex;
-  gap: 12px;
-  margin-top: 18px;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
 }
 
-.empty_card {
-  border-radius: 18px !important;
+.students_empty_text {
+  font-size: 12px;
+  color: #555;
 }
 
-@media (max-width: 768px) {
-  .students_toolbar {
-    gap: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Taskbar shared */
+.win-taskbar-task {
+  background-color: var(--win-btn-face);
+  border-top: 1px solid var(--win-btn-shadow);
+  border-left: 1px solid var(--win-btn-shadow);
+  border-right: 1px solid var(--win-btn-highlight);
+  border-bottom: 1px solid var(--win-btn-highlight);
+  font-size: 11px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+  cursor: pointer;
+}
 
-  .top_btns {
-    width: 100%;
-  }
+.win-taskbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--win-btn-shadow);
+  box-shadow: 1px 0 0 var(--win-btn-highlight);
+  margin: 0 2px;
+}
 
-  .top_btns button {
-    flex: 1;
+@media (max-width: 640px) {
+  .students_sidebar {
+    display: none;
   }
-
-  .student_card_btns {
-    flex-direction: column;
-  }
-
-  .student_card_btns button {
-    width: 100%;
+  .students_table th:nth-child(3),
+  .students_table td:nth-child(3),
+  .students_table th:nth-child(4),
+  .students_table td:nth-child(4) {
+    display: none;
   }
 }
