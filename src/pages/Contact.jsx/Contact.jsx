@@ -27,7 +27,11 @@ export default function Contact() {
           <Box sx={{ display: "flex", gap: 2 }}>
             <Link to="/" className="contact_top_link">Home</Link>
             <Link to="/about" className="contact_top_link">About</Link>
-            <Link to="/login" className="contact_top_link">Login</Link>
+            <Link to="/login" className="nav_btn_link">
+              <Button variant="contained" color="success">
+                Login
+              </Button>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
