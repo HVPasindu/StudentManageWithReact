@@ -17,7 +17,11 @@ export default function About() {
           <Box sx={{ display: "flex", gap: 2 }}>
             <Link to="/" className="top_link">Home</Link>
             <Link to="/contact" className="top_link">Contact</Link>
-            <Link to="/login" className="top_link">Login</Link>
+            <Link to="/login" className="nav_btn_link">
+              <Button variant="contained" color="success">
+                Login
+              </Button>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>

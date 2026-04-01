@@ -2,10 +2,16 @@
   color: white;
   text-decoration: none;
   font-weight: 500;
+  padding: 8px 18px;
+  display: inline-block;
+  transition: 0.3s;
 }
 
 .contact_top_link:hover {
-  text-decoration: underline;
+  background-color: aqua;
+  color: black;
+  border-radius: 40px;
+
 }
 
 .contact_hero {
