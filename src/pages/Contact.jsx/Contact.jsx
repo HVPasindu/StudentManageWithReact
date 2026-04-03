@@ -67,7 +67,7 @@ export default function Contact() {
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6a1b9a" }}>
-            EduManage
+            StudentHub
           </Typography>
 
           <Link
