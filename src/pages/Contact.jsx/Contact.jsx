@@ -27,7 +27,7 @@ export default function Contact() {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            EduManage
+            StudentHub
           </Typography>
 
           {/* Desktop Menu */}
